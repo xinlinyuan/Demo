@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function tip(opt){
+			this.content = opt;
+			this.option = null;
+			this.create();
+		}
+		tip.prototype = {
+			constructor : tip,
+			create : function(){
+				this.option = document.createElement("div");
+				this.option.style.position ="absolute";
+				this.option.style.left =(document.documentElement.clientWidth - this.option.offsetWidth)/2 + "px";
+				this.option.style.top =(document.documentElement.clientHeight - this.option.offsetHeight)/3 + "px";
+				this.option.style.border = "1px solid #ccc";
+				var html = "<p>"+ this.content +"</p>";
+				this.option.innerHTML = html;
+				document.body.appendChild(this.option);
+				var That = this;
+				setTimeout(function(){
+					document.body.removeChild(That.option)
+				},2000)
+			}
+		}
+		new tip("heh")
+	</script>
+</body>
+</html>
